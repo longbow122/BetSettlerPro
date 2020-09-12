@@ -8,6 +8,10 @@ import me.longbow122.BetSettlerPro.configuration.file.FileConfiguration;
 public class UserUtils {
 	private Main main = new Main();
 	
+	/*
+	 * Adds a user by taking in their username and their password and adds these details to the
+	 * file. 
+	 */
 	public boolean addUser(String userName, String password) {
 		FileConfiguration file = main.getFileConfig();
 		if(file.contains("users")) {
@@ -28,6 +32,10 @@ public class UserUtils {
 		return true;
 	}
 	
+	/*
+	 * Removed the user by searching for their username. Finds the username, then finds the right
+	 * passwords and deletes both.
+	 */
 	public boolean removeUser(String userName) {
 		FileConfiguration file = main.getFileConfig();
 		if(file.contains("users")) {

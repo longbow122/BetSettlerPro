@@ -15,6 +15,11 @@ public class Utils {
 	private Main main = new Main();
 	private UserUtils uu = new UtilsDep().getUserUtilsClass();
 	
+	
+	/*
+	 * The main startup method. Runs the login menu if a player selects login.
+	 * If a player sleects /adminbypass, the admin menu is run.
+	 */
 	public boolean startup() throws IOException {
 		System.out.println("Welcome to BetSettlerPro! Please type /login and enter your username and password.");
 		BufferedReader mainReader = new BufferedReader(new InputStreamReader(System.in));
@@ -35,6 +40,12 @@ public class Utils {
 		return true;
 	}
 	
+	
+	/*
+	 * The main login menu. Checks the file for the users input and checks it for the right
+	 * password. Returns the name of the main user who logs in. 
+	 * 
+	 */
 	public String login() throws IOException {
 		System.out.println("Please enter your username. (WARNING: CASE SENSITIVE)");
 		BufferedReader userReader = new BufferedReader(new InputStreamReader(System.in));
@@ -57,6 +68,10 @@ public class Utils {
 		return login();
 	}
 	
+	/*
+	 * Runs the main user additions menu. Using this, you can easily add a user to the main
+	 * file. 
+	 */
 	public void addUserMenu(String adminName) throws IOException {
 		System.out.println("Welcome to the user addition menu!");
 		System.out.println("To add a user, please enter a username and a password seperated by a comma, like so 'DPatel123,AHS'");
@@ -85,6 +100,10 @@ public class Utils {
 		}
 	}
 	
+	/*
+	 * Runs the main user removal menu. Using this, you can easily remove a user from the main
+	 * file. 
+	 */
 	public void removeUserMenu(String adminName) throws IOException {
 		System.out.println("Welcome to the user removal menu!");
 		System.out.println("To remove a user, please enter their username, like so 'DPatel123'");
@@ -97,6 +116,10 @@ public class Utils {
 		return;
 	}
 	
+	/*
+	 * Runs the main admin menu. Uses integers to make a selection to ensure the user
+	 * can easily navigate a menu. 
+	 */
 	public void makeAdminMenu() throws IOException {
 		System.out.println("Welcome to the admin menu! Please specify which user you are.");
 		BufferedReader adminReader = new BufferedReader(new InputStreamReader(System.in));
@@ -123,6 +146,11 @@ public class Utils {
 		}
 	}
 	
+	/*
+	 * Same thing as the user admin menu, but just with the login process skipped.
+	 * This will allow for any bad input to be skipped over without a login so the user doesn't
+	 * need to go through the whole process.
+	 */
 	public void adminAlreadyLoggedIn(String adminName) throws IOException {
 		System.out.println("Welcome to the Admin menu! User logged in: " + WordUtils.capitalizeFully(adminName) + " Please enter one of the below options:");
 		System.out.println("1) Add user");
@@ -144,6 +172,7 @@ public class Utils {
 		return;
 	}
 	
+	//Basic selection sort method.
 	public static int[] selectionSort(int[] array) {
 	     for (int i = 0; i < array.length - 1; i++) {
 	         int maxIndex = i;

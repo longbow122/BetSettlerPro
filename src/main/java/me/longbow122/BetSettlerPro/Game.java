@@ -15,10 +15,8 @@ public class Game {
 	private String player1;
 	private String player2;
 	private Main main = new Main();
-	
-	//TODO
-	// Make the game. Make sure its bug-free then extensively test
-	
+
+	//Main Game class constructer, used to get the Game object and used to play and run the game
 	public Game(String player1, String player2) {
 		this.player1 = player1;
 		this.player2 = player2;
@@ -34,17 +32,26 @@ public class Game {
 		return false;
 	}
 	
-	public int rollDice() {
+	/*
+	 * Rolls the dice by generating a random number between 0 and 5 and adds one to it to ensure
+	 * the number 0 is avoided while being able to generate the number 6.
+	 */
+	private int rollDice() {
 		System.out.println("Dice rolling...");
 		Random r = new Random();
 		int picked = r.nextInt(5) + 1;
 		return picked;
 	}
 	
+	/*
+	 * This is the main playGame method. When this method is ran, the main BetSettlerPro game
+	 * is played. Get settling!
+	 */
 	public void playGame() throws IOException {
 		System.out.println("Game beginning...");
 		System.out.println("Player 1 rolls commencing... Rolls: 5");
 		int score1 = 0;
+		// Runs the turn for Player 1, includes the special double rolls
 		for(int x = 0; x < 5; x++) {
 			int i = rollDice();
 			int i2 = rollDice();
@@ -57,6 +64,8 @@ public class Game {
 				i3 = rollDice();
 				System.out.println("Player 1 roll dice 3: " + i3);
 			}
+			// Deducts 5 points if the player's total point score is odd.
+			// Also adds 10 points if the player's total point score is even.
 			int iAdd = i + i2 + i3;
 			if(isEvenNumber(iAdd)) {
 				score1 = score1 + 10;
@@ -68,9 +77,11 @@ public class Game {
 			score1 = score1 + iAdd;
 			System.out.println("Player 1 new score: " + score1);
 		}
+		// Ends Player 1's turn and prompts the player to press enter to begin the next turn.
 		System.out.println(player1 + "'s turn is over! Press enter to start " + player2 + "'s turn.");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	    in.readLine();
+	    // Player 2's turn now begins
 	    System.out.println("Player 2 rolls commencing... Rolls: 5");
 		int score2 = 0;
 		for(int x = 0; x < 5; x++) {
@@ -85,6 +96,8 @@ public class Game {
 				i3 = rollDice();
 				System.out.println("Player 2 roll dice 3: " + i3);
 			}
+			// Adds 10 bonus points to player 2s total score if their total score is even
+			// Removed 5 bonus points to player 2s total score if their total score is odd
 			int iAdd = i + i2 + i3;
 			if(isEvenNumber(iAdd)) {
 				score2 = score2 + 10;
@@ -96,11 +109,14 @@ public class Game {
 			score2 = score2 + iAdd;
 			System.out.println("Player 2 new score: " + score2);
 	}
+		// GAME OVER!
 		System.out.println("Game over! " + player1 + "'s score: " + score1 + ". " + player2 +  "'s score: " + score2 + ".");
 		if(score1 == score2) {
 			tieBreaker(player1, player2, score1, score2);
 			return;
 		}
+		// If Player 1s score is higher, player 1 wins!
+		// If Player 2s score is higher, player 2 wins!
 		if(score1 > score2) {
 			System.out.println(player1 + " has won the game! Please press ENTER to exit BSP.");
 			addWinner(player1, score1);
@@ -108,12 +124,17 @@ public class Game {
 			System.out.println(player2 + " has won the game! Please press ENTER to exit BSP.");
 			addWinner(player2, score2);
 		}
+		//Press enter to exit BSP.
 		BufferedReader ini = new BufferedReader(new InputStreamReader(System.in));
 		ini.readLine();
+		// Winners are sorted inside the main file. 
 		sortWinners();
 		return;
 }
 	
+	/*
+	 * If there is an equal score, the tiebreaker method is ran and they roll again.
+	 */
 	public void tieBreaker(String player1, String player2, int score1, int score2) {
 		System.out.println("Tiebreaker Round!");
 		System.out.println("Each player will roll one dice. The winner with the highest dice point shall win!");
@@ -126,21 +147,28 @@ public class Game {
 			Onescore = Onescore + pick1;
 			Twoscore = Twoscore + pick2;
 		}
+		// Tiebreaker is ran
 		if(Onescore == Twoscore) {
 			tieBreaker(player1, player2, score1, score2);
 			return;
 		}
+		// If Player 1s tiebreaker score is higher than Player 2s. 
 		if(Onescore > Twoscore) {
 			System.out.println(player1 + " has won the game!");
 			score1 = score1 + Onescore;
 			addWinner(player1, score1);
 			return;
 		}
+		// If Player 2s tiebreaker score is higher than Player 1s.
 		System.out.println(player2 + " has won the game!");
 		score2 = score2 + Twoscore;
 		return;
 	}
 	
+	/*
+	 * Adds the specified winner with their specified score to the main file. 
+	 * Once they have been added to the file, the file is now saved
+	 */
 	public boolean addWinner(String playerName, int score) {
 		FileConfiguration file = main.getFileConfig();
 		if(file.contains("winners")) {
@@ -174,6 +202,9 @@ public class Game {
         return newarr; 
     }
     
+    /*
+     * Searches a HashMap<String, Integer> for a specific key through it's value.
+     */
     public String getKeyFromValue(HashMap<String, Integer> map, int value) {
     	Set<String> keys = map.keySet();
     	for(String x : keys) {
@@ -186,6 +217,10 @@ public class Game {
     }
 
 	
+    /*
+     * Sorts out the winners by putting them all in an array and taking them through a 
+     * selection sort. Once they have been sorted, the array is replaced.
+     */
 	public boolean sortWinners() {
 		FileConfiguration file = main.getFileConfig();
 		if(file.contains("winners")) {
