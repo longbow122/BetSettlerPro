@@ -37,12 +37,14 @@ public class Main {
 		return;	
 	}
 	
-	//Gets the main bsp.yml file
+	//Gets the main bsp.yml file object.
+	//This object is only really ever used a few times in the Main class. 
 	public File getFile() {
 		return file;
 	}
 	
-	//Accesses the object in which I am able to write into the file
+	//Accesses the object in which I am able to write into the file.
+	// using the FileConfiguration methods, I am able to add sections and keys and values with ease through other Util methods.
 	public FileConfiguration getFileConfig() {
 		return fileConfig;
 	}
