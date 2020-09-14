@@ -173,6 +173,9 @@ public class Utils {
 	}
 	
 	//Basic selection sort method.
+	//This method will flick through the entre Integer array (non-primitive) 
+	// and bring the highest number to the front of the array.
+	// This will result in the total sorting of the entire array.
 	public static int[] selectionSort(int[] array) {
 	     for (int i = 0; i < array.length - 1; i++) {
 	         int maxIndex = i;
