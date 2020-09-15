@@ -25,6 +25,7 @@ public class Game {
 	
 	//This method will return TRUE if the number is even
 	// And it will return FALSE if the number is odd.
+	// Takes in one Integer arg (non-primitive) and uses the modulus operator 
 	public boolean isEvenNumber(int number) {
 		if(number % 2 == 0) {
 			return true;
@@ -134,6 +135,8 @@ public class Game {
 	
 	/*
 	 * If there is an equal score, the tiebreaker method is ran and they roll again.
+	 // Takes in 2 String arguments (primitive) and two Integer arguments (non-Primitive) which are the player's names
+	 // and scores.
 	 */
 	public void tieBreaker(String player1, String player2, int score1, int score2) {
 		System.out.println("Tiebreaker Round!");
@@ -168,6 +171,8 @@ public class Game {
 	/*
 	 * Adds the specified winner with their specified score to the main file. 
 	 * Once they have been added to the file, the file is now saved
+	 // Takes in one String argument (primitive) and one Integer argument (non-primitive) for the score
+	 // and playerName to be automatically added to the file.
 	 */
 	public boolean addWinner(String playerName, int score) {
 		FileConfiguration file = main.getFileConfig();
@@ -204,6 +209,9 @@ public class Game {
     
     /*
      * Searches a HashMap<String, Integer> for a specific key through it's value.
+     // Takes the HashMap in question as an argument and takes the Integer as the value to search and 
+     // returns the String as it is the key it is searching for.
+     // If null, NPE will appear. Key was not found through the value.
      */
     public String getKeyFromValue(HashMap<String, Integer> map, int value) {
     	Set<String> keys = map.keySet();
@@ -220,6 +228,8 @@ public class Game {
     /*
      * Sorts out the winners by putting them all in an array and taking them through a 
      * selection sort. Once they have been sorted, the array is replaced.
+     // If returned as FALSE, "winners" ConfigurationSection could not be found.
+     // It is most likely that the file does not exist. 
      */
 	public boolean sortWinners() {
 		FileConfiguration file = main.getFileConfig();
