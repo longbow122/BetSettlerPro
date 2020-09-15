@@ -103,6 +103,7 @@ public class Utils {
 	/*
 	 * Runs the main user removal menu. Using this, you can easily remove a user from the main
 	 * file. 
+	 // Takes in the String "adminName" to ensure that the admin stays logged-in
 	 */
 	public void removeUserMenu(String adminName) throws IOException {
 		System.out.println("Welcome to the user removal menu!");
@@ -150,6 +151,7 @@ public class Utils {
 	 * Same thing as the user admin menu, but just with the login process skipped.
 	 * This will allow for any bad input to be skipped over without a login so the user doesn't
 	 * need to go through the whole process.
+	 // Takes in a string argument so that the admin is able to stay logged in.
 	 */
 	public void adminAlreadyLoggedIn(String adminName) throws IOException {
 		System.out.println("Welcome to the Admin menu! User logged in: " + WordUtils.capitalizeFully(adminName) + " Please enter one of the below options:");
