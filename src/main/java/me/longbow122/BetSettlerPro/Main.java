@@ -13,6 +13,12 @@ public class Main {
 	private static File file = new File("BetSettlerPro\\bsp.yml");
 	private static FileConfiguration fileConfig;
 
+	/*
+	* Main program can be used as a game. Emulation of a dice can be used to store and generate random numbers.
+	* Real-world applications are very low for this specific program due to the fact that it is simply a game.
+	*/
+	
+	
 	
 	/*
 	 * Main method which is set to the run configuration. This is the initial code that will
